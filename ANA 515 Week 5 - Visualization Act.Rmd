@@ -1,0 +1,32 @@
+---
+title: "ANA 515 - Week 5 Visualization activity"
+author: "Ganapathy Subramanian"
+date: "20-Nov-2021"
+output:
+  html_document: null
+  theme:
+    bootswatch: cerulean
+---
+```{r lib, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(bslib)
+library(plotrix)
+```
+
+```{r dataload, message=FALSE, warning=FALSE}
+drivers <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv"
+car_crashes <- read.csv(drivers)
+```
+
+```{r include=TRUE}
+ggplot(data = car_crashes, aes(x = State, y = Number.of.drivers.involved.in.fatal.collisions.per.billion.miles)) +
+      geom_bar(stat = "identity", fill = "orange", width = 0.1) + labs(title = "Car Crashes per state", x = "State", y = "Number.of.drivers.involved.in.fatal.collisions.per.billion.miles") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust= 1))
+```
+
+```{r include=TRUE}
+slices <- car_crashes$Number.of.drivers.involved.in.fatal.collisions.per.billion.miles
+lbls <- car_crashes$State
+pie(slices,labels=lbls, main="Pie Chart of Crashes by state ", cex = 0.5)
+```
